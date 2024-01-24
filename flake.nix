@@ -3,7 +3,7 @@
 
     inputs = {
 
-        nixpkgs = {
+      nixpkgs = {
            url = "github:NixOS/nixpkgs/nixos-unstable";
       };
 
@@ -13,7 +13,7 @@
       };
 
       force = {
-            url = "github:jutskitting/salesforce-dev-flake";
+          url = "github:jutskitting/sfdx-shortcut-flake";
       };
 
       flake-utils.url = "github:numtide/flake-utils";
@@ -21,47 +21,46 @@
   };
   outputs = { self, nixpkgs, neovim, flake-utils,force, }:
     flake-utils.lib.eachDefaultSystem (system:
-      let
-        overlayFlakeInputs = prev: final: {
-          neovim = neovim.packages.${system}.neovim;
-        };
+        let
+            overlayFlakeInputs = prev: final: {
+              neovim = neovim.packages.${system}.neovim;
+            };
 
-        overlayNeovim = prev: final: {
-          customNeovim = import ./packages/nvimConfig.nix {
-            pkgs = final;
-          };
-        };
+            overlayNeovim = prev: final: {
+              customNeovim = import ./packages/nvimConfig.nix {
+                pkgs = final;
+              };
+            };
 
-        overlays = [ 
-            overlayFlakeInputs
-            overlayNeovim
-        ];
+            overlays = [ 
+                overlayFlakeInputs
+                overlayNeovim
+            ];
 
-        pkgs = import nixpkgs {
-          inherit system overlays;
-        };
+            pkgs = import nixpkgs {
+              inherit system overlays;
+            };
 
-      in
-      {
-        flakedPkgs = pkgs;
+        in
+        {
 
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            openssl
-            pkg-config
-            customNeovim
-            nodejs
-            force
-          ];
-        };
+            devShells.default = pkgs.mkShell {
+                buildInputs = with pkgs; [
+                   openssl
+                   pkg-config
+                   customNeovim
+                   nodejs
+                   force
+                ];
+            };
 
-        packages.default = pkgs.customNeovim;
+            packages.default = pkgs.customNeovim;
 
-        apps.default = {
-          type = "app";
-          program = "${pkgs.customNeovim}/bin/nvim";
-        };
-      }
+            apps.default = {
+                  type = "app";
+                  program = "${pkgs.customNeovim}/bin/nvim";
+            };
+        }
     );
 }
 
