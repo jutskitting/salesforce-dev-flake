@@ -37,15 +37,15 @@
           inherit system overlays;
         };
 
-        buildNodeJs = pkgs.callPackage "${nixpkgs}/pkgs/development/web/nodejs/nodejs.nix" {
-            python = pkgs.python3;
-        };
-
-        nodejs = buildNodeJs {
-            enableNpm = true;
-            version = "20.5.1";
-            sha256 = "sha256-Q5xxqi84woYWV7+lOOmRkaVxJYBmy/1FSFhgScgTQZA=";
-        };
+        # buildNodeJs = pkgs.callPackage "${nixpkgs}/pkgs/development/web/nodejs/nodejs.nix" {
+        #     python = pkgs.python3;
+        # };
+        #
+        # nodejs = buildNodeJs {
+        #     enableNpm = true;
+        #     version = "20.5.1";
+        #     sha256 = "sha256-Q5xxqi84woYWV7+lOOmRkaVxJYBmy/1FSFhgScgTQZA=";
+        # };
 
       in
       {
@@ -58,12 +58,6 @@
             customNeovim
             nodejs
           ];
-        };
-
-        devShell = pkgs.mkShell{
-            buildinputs = with pkgs; [
-                nodejs
-            ];
         };
 
         packages.default = pkgs.customNeovim;
