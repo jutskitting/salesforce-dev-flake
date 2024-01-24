@@ -22,9 +22,12 @@
   outputs = { self, nixpkgs, neovim, flake-utils,force, }:
     flake-utils.lib.eachDefaultSystem (system:
         let
+
             overlayFlakeInputs = prev: final: {
               neovim = neovim.packages.${system}.neovim;
             };
+
+            force-import = force.packages.${system}.default;
 
             overlayNeovim = prev: final: {
               customNeovim = import ./packages/nvimConfig.nix {
@@ -50,7 +53,7 @@
                    pkg-config
                    customNeovim
                    nodejs
-                   force
+                   force-import
                 ];
             };
 
