@@ -1,21 +1,25 @@
 {
-  description = "A Neovim Shell for salesforce development";
+    description = "A Neovim Shell for salesforce development";
 
-  inputs = {
+    inputs = {
 
-    nixpkgs = {
-  	   url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+        nixpkgs = {
+           url = "github:NixOS/nixpkgs/nixos-unstable";
+      };
 
-    neovim = {
-      url = "github:neovim/neovim/stable?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+      neovim = {
+          url = "github:neovim/neovim/stable?dir=contrib";
+          inputs.nixpkgs.follows = "nixpkgs";
+      };
 
-    flake-utils.url = "github:numtide/flake-utils";
+      force = {
+            url = "github:jutskitting/salesforce-dev-flake";
+      };
+
+      flake-utils.url = "github:numtide/flake-utils";
 
   };
-  outputs = { self, nixpkgs, neovim, flake-utils, }:
+  outputs = { self, nixpkgs, neovim, flake-utils,force, }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlayFlakeInputs = prev: final: {
@@ -37,16 +41,6 @@
           inherit system overlays;
         };
 
-        # buildNodeJs = pkgs.callPackage "${nixpkgs}/pkgs/development/web/nodejs/nodejs.nix" {
-        #     python = pkgs.python3;
-        # };
-        #
-        # nodejs = buildNodeJs {
-        #     enableNpm = true;
-        #     version = "20.5.1";
-        #     sha256 = "sha256-Q5xxqi84woYWV7+lOOmRkaVxJYBmy/1FSFhgScgTQZA=";
-        # };
-
       in
       {
         flakedPkgs = pkgs;
@@ -57,6 +51,7 @@
             pkg-config
             customNeovim
             nodejs
+            force
           ];
         };
 
