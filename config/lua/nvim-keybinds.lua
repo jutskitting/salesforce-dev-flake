@@ -1,5 +1,4 @@
 local opt = { noremap = true, silent = false }
-local current_file = vim.fn.expand('%')
 
 -- paste improvements
 vim.api.nvim_set_keymap('x', '<leader>yy', '"+y', opt)
@@ -15,9 +14,8 @@ vim.api.nvim_set_keymap("v", "p", '"_dP', opt)
 -- Open terminal, run nix run, and switch back to the original window
 --
 
-local command = string.format(":w <CR> :belowright 15sp <CR> :terminal npx sf project deploy start --source-dir '%s' --ignore-conflicts <CR> :wincmd k <CR>", current_file)
 
-vim.api.nvim_set_keymap('n', '<Leader>ww', command, opt)
+vim.api.nvim_set_keymap('n', '<Leader>ww', ":w <CR> :belowright 15sp <CR> :terminal npx sf project deploy start --source-dir '%p' --ignore-conflicts <CR> :wincmd k <CR>", opt)
 
 -- toggle term for future
 -- au FileType java noremap <buffer> <leader>fo <Cmd>execute v:count . 'ToggleTerm' <CR> force <CR>
