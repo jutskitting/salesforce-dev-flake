@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap("v", "p", '"_dP', opt)
 --
 
 
-vim.api.nvim_set_keymap('n', '<Leader>ww', ":w <CR> :belowright 15sp <CR> :terminal npx sf project deploy start --source-dir '%p' --ignore-conflicts <CR> :wincmd k <CR>", opt)
+vim.api.nvim_set_keymap('n', '<Leader>ww', ":w <CR> :belowright 15sp <CR> :terminal npx sf project deploy start --source-dir '%' --ignore-conflicts <CR> :wincmd k <CR>", opt)
 
 -- toggle term for future
 -- au FileType java noremap <buffer> <leader>fo <Cmd>execute v:count . 'ToggleTerm' <CR> force <CR>
