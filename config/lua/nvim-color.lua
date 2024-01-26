@@ -3,22 +3,22 @@ vim.cmd('colorscheme 256_noir')
 -- Define your colors
 local colors = {
     background = "#000000",   -- Black background
-    search_bg = "#000000",   
-    search_fg = "#FFFFFF",    
-    comment_fg = "#8CC6D9",   -- Deep blood red for comments
-    normal_fg = "##666699",   
-    line_nr_fg = "#FF0000",   -- white
+    search_fg = "#FFFFFF",   
+    search_bg = "#305959",    
+    normal_fg = "#339966",   
+    comment_fg = "#70862D",   
+    line_nr_fg = "#70DBA6",   
 
-    keyword_fg = "#006699", 
+    keyword_fg = "#006290", 
     function_fg = "#FFFFFF", -- white
     class_fg = "#FF4500",    
     constant_fg = "#FFFFFF", -- white
-    special_fg = "#FF69B4",  -- Hot pink
-    operator_fg = "#F08080", -- Light coral
+    special_fg = "#3069B4",  -- Hot pink
+    operator_fg = "#3811C8", -- Light coral
     type_fg = "#FFFFFF",     -- white
-    preproc_fg = "#FF7F50",  
-    number_fg = "#FFD700",   -- Gold
-    string_fg = "#A6A6BF",   
+    preproc_fg = "#4F7F50",  
+    number_fg = "#787170",   -- Gold
+    string_fg = "#288A8A",   
 }
 
 -- Set the colors for the highlight groups
