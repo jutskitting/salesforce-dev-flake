@@ -26,3 +26,19 @@ vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j <CR>', opt)
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k <CR>', opt)
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l <CR>', opt)
 
+require("toggleterm").setup{}
+ 
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({cmd = "lazygit", hidden = true, direction = "float"})
+local force = Terminal:new({cmd = "force", hidden = true, direction = "float"})
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+function _force_toggle()
+  force:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>lua _force_toggle()<CR>", {noremap = true, silent = true})
