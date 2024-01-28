@@ -27,8 +27,6 @@
               neovim = neovim.packages.${system}.neovim;
             };
 
-            force-import = force.packages.${system}.default;
-
             overlayNeovim = prev: final: {
               customNeovim = import ./packages/nvimConfig.nix {
                 pkgs = final;
@@ -53,7 +51,7 @@
                    pkg-config
                    customNeovim
                    nodejs
-                   force-import
+                   force.defaultPackage.${system}
                 ];
             };
 
