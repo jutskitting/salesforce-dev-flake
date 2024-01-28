@@ -17,9 +17,6 @@ vim.api.nvim_set_keymap("v", "p", '"_dP', opt)
 
 vim.api.nvim_set_keymap('n', '<Leader>ww', ":w <CR> :belowright 15sp <CR> :terminal npx sf project deploy start --source-dir '%' --ignore-conflicts <CR> :wincmd k <CR>", opt)
 
--- toggle term for future
--- au FileType java noremap <buffer> <leader>fo <Cmd>execute v:count . 'ToggleTerm' <CR> force <CR>
-
 -- Window navigation
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h <CR>', opt)
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j <CR>', opt)
@@ -37,6 +34,10 @@ function _lazygit_toggle()
 end
 
 function _force_toggle()
+  local file_path = vim.fn.expand('%:p') -- Gets the full path of the current file
+  local file_name = vim.fn.expand('%:t') -- Gets the name of the current file
+  local full_command = "force " .. file_path .. " " .. file_name -- Combine command, path, and name
+  force.cmd = full_command
   force:toggle()
 end
 
