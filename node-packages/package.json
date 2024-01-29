@@ -1,7 +1,0 @@
-{
-  "name": "sf",
-  "version": "1.0.0",
-  "dependencies": {
-    "@salesforce/cli": "latest"
-  }
-}
