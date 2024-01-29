@@ -3,20 +3,20 @@
 
     inputs = {
 
-      nixpkgs = {
-           url = "github:NixOS/nixpkgs/nixos-unstable";
-      };
+        nixpkgs = {
+             url = "github:NixOS/nixpkgs/nixos-unstable";
+        };
 
-      neovim = {
-          url = "github:neovim/neovim/stable?dir=contrib";
-          inputs.nixpkgs.follows = "nixpkgs";
-      };
+        neovim = {
+            url = "github:neovim/neovim/stable?dir=contrib";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-      force = {
-          url = "github:jutskitting/sfdx-shortcut-flake";
-      };
+        force = {
+            url = "github:jutskitting/sfdx-shortcut-flake";
+        };
 
-      flake-utils.url = "github:numtide/flake-utils";
+        flake-utils.url = "github:numtide/flake-utils";
 
   };
   outputs = { self, nixpkgs, neovim, flake-utils,force, }:
@@ -24,13 +24,13 @@
         let
 
             overlayFlakeInputs = prev: final: {
-              neovim = neovim.packages.${system}.neovim;
+                 neovim = neovim.packages.${system}.neovim;
             };
 
             overlayNeovim = prev: final: {
-              customNeovim = import ./packages/nvimConfig.nix {
-                pkgs = final;
-              };
+                  customNeovim = import ./packages/nvimConfig.nix {
+                        pkgs = final;
+                  };
             };
 
             overlays = [ 
@@ -39,7 +39,14 @@
             ];
 
             pkgs = import nixpkgs {
-              inherit system overlays;
+                  inherit system overlays;
+            };
+
+            nodeEnv = import ./node-packages/node-env.nix {
+                inherit pkgs;
+                nodePackages = import ./node-packages/node-packages.nix {
+                    inherit pkgs nodeEnv;
+                };
             };
 
         in
@@ -50,8 +57,8 @@
                    openssl
                    pkg-config
                    customNeovim
-                   nodejs
                    force.defaultPackage.${system}
+                   nodeEnv
                 ];
             };
 
