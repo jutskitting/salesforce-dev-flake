@@ -41,51 +41,35 @@
                     inherit overlays;
                 };
 
-                sf = with pkgs; buildNpmPackage rec {
-                  pname = "sf";
-                  version = "2.27.4";
-
-                  src = fetchFromGitHub {
-                    owner = "salesforcecli";
-                    repo = pname;
-                    rev = "v${version}";
-                    hash = "sha256-BgkDmswsA9uns7IlUhfFvrm7hDHomOlK+yrdI4abT6I=";
-                  };
-
-                  npmDepsHash = "sha256-XSLa0FjVyADWWhFfkZ2iKTjFDda6mMXjoYMXLRSYQKQ=";
-
-                  # The prepack script runs the build script, which we'd rather do in the build phase.
-                  npmPackFlags = [ "--ignore-scripts" ];
-
-                  NODE_OPTIONS = "--openssl-legacy-provider";
-
-                  doCheck = true;
-                  checkPhase = ''
-                    npm run tslint
-                    npm run stylelint
-                    npm run tscompile
-                    npm run test
-                  '';
-
-                  npmBuild = ''
-                    npm run build
-                  '';
-
-                  installPhase = ''
-                    mv dist $out
-                  '';
-
-                    postPatch = ''
-                        cp ./package-lock.json $sourceRoot/
-                    '';
-                };
+                # sf = with pkgs; buildNpmPackage rec {
+                #   pname = "sf";
+                #   version = "2.27.4";
+                #
+                #   src = fetchFromGitHub {
+                #     owner = "salesforcecli";
+                #     repo = pname;
+                #     rev = "v${version}";
+                #     hash = "sha256-BgkDmswsA9uns7IlUhfFvrm7hDHomOlK+yrdI4abT6I=";
+                #   };
+                #
+                #   npmDepsHash = "sha256-m4DTkMBxZF8j+XyRd7IadgIE9W716j7oXrUG+rE5cn4=";
+                #
+                #   # The prepack script runs the build script, which we'd rather do in the build phase.
+                #   npmPackFlags = [ "--ignore-scripts" ];
+                #   #
+                #   postPatch=''
+                #         ls
+                #         install -D ${./package-lock.json} ./package-lock.json
+                #   '';
+                #   NODE_OPTIONS = "--openssl-legacy-provider";
+                # };
 
             in
             {
 
                 devShells.default = with pkgs; mkShell {
                     buildInputs = [
-                       sf
+                       nodejs_21
                        openssl
                        pkg-config
                        customNeovim
