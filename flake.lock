@@ -58,17 +58,14 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1706479125,
-        "narHash": "sha256-1Nz6dvkF39/lfBb1D3sw5i/kGBbSz1przKgQip/pFCM=",
-        "owner": "jutskitting",
-        "repo": "sfdx-shortcut-flake",
-        "rev": "38f4b1be47ad29b267a587a96200c4dedf8af12b",
-        "type": "github"
+        "lastModified": 1706536382,
+        "narHash": "sha256-yL+UIn6NiF4Sjh212tdHTyrwNgrp02fllZcbAfW7rg8=",
+        "path": "/home/kit/Documents/flakes/sfdx-shortcut-flake",
+        "type": "path"
       },
       "original": {
-        "owner": "jutskitting",
-        "repo": "sfdx-shortcut-flake",
-        "type": "github"
+        "path": "/home/kit/Documents/flakes/sfdx-shortcut-flake",
+        "type": "path"
       }
     },
     "naersk": {

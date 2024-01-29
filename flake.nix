@@ -11,9 +11,11 @@
                 inputs.nixpkgs.follows = "nixpkgs";
             };
 
-            force = {
-                url = "github:jutskitting/sfdx-shortcut-flake";
-            };
+            # force = {
+            #     url = "github:jutskitting/sfdx-shortcut-flake";
+            # };
+
+            force.url = "path:/home/kit/Documents/flakes/sfdx-shortcut-flake";
 
             flake-utils.url = "github:numtide/flake-utils";
 
