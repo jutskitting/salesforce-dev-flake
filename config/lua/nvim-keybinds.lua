@@ -36,7 +36,7 @@ end
 function _force_toggle()
   local file_path = vim.fn.expand('%:p') -- Gets the full path of the current file
   local file_name = vim.fn.expand('%:t') -- Gets the name of the current file
-  local full_command = "force " .. file_path .. " " .. file_name -- Combine command, path, and name
+  local full_command = "force " .. file_path .. " " .. file_name .. "; bash" -- Combine command, path, and name
   force.cmd = full_command
   force:toggle()
 end
