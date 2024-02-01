@@ -7,4 +7,5 @@ with pkgs.vimPlugins; [
   nvim-tree-lua
   nvim-lspconfig
   toggleterm-nvim
+  nvim-treesitter.withAllGrammars
 ]
