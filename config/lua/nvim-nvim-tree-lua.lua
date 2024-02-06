@@ -19,7 +19,12 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = true,
   },
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+    ignore_list = {}
+  },
 })
-
 
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle <CR>' , opt)
