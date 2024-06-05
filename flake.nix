@@ -71,13 +71,18 @@
 
                 devShells.default = with pkgs; mkShell {
                     buildInputs = [
-                       nodejs_21
+                       nodejs_22
                        openssl
                        pkg-config
                        customNeovim
                        force.defaultPackage.${system}
                     ];
-                };
+
+                    shellHook = ''
+                            export BROWSER=chromium
+                            npm install @salesforce/cli --global
+                     '';
+                    };
 
                 packages.default = pkgs.customNeovim;
 
