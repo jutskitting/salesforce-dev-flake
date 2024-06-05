@@ -5,11 +5,11 @@
             nixpkgs = {
                  url = "github:NixOS/nixpkgs/nixos-unstable";
             };
-
-            neovim = {
-                url = "github:neovim/neovim/stable?dir=contrib";
-                inputs.nixpkgs.follows = "nixpkgs";
-            };
+            #
+            # neovim = {
+            #     url = "github:neovim/neovim/stable?dir=contrib";
+            #     inputs.nixpkgs.follows = "nixpkgs";
+            # };
 
             # force = {
             #     url = "github:jutskitting/sfdx-shortcut-flake";
@@ -20,22 +20,31 @@
             flake-utils.url = "github:numtide/flake-utils";
 
         };
-    outputs = { self, nixpkgs, neovim, flake-utils,force, }:
+    outputs = { self, nixpkgs, flake-utils,force, }:
         flake-utils.lib.eachDefaultSystem (system:
             let
-                overlayFlakeInputs = prev: final: {
-                     neovim = neovim.packages.${system}.neovim;
+                 basePkgs = import nixpkgs { inherit system; };
+                # overlayFlakeInputs = prev: final: {
+                #   neovim = neovim.packages.${system}.neovim;
+                # };
+
+                # Define the overlays
+                overlayCustomNeovim = prev: final: {
+                  neovim = prev.neovim.overrideAttrs (oldAttrs: {
+                    buildInputs = oldAttrs.buildInputs ++ [ final.customNeovim ];
+                  });
                 };
 
                 overlayNeovim = prev: final: {
-                      customNeovim = import ./packages/nvimConfig.nix {
-                            pkgs = final;
-                      };
+                  customNeovim = import ./packages/nvimConfig.nix {
+                    pkgs = final;
+                  };
                 };
 
-                overlays = [ 
-                    overlayFlakeInputs
-                    overlayNeovim
+                # Combine overlays
+                overlays = [
+                  overlayNeovim
+                  overlayCustomNeovim
                 ];
 
                 pkgs = import nixpkgs {

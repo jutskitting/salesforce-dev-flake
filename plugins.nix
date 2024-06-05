@@ -7,6 +7,6 @@ with pkgs.vimPlugins; [
   nvim-tree-lua
   nvim-lspconfig
   toggleterm-nvim
-  nvim-treesitter
-  copilot-vim
+  nvim-treesitter.withAllGrammars
+  # copilot-vim
 ]
