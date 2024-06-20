@@ -1,3 +1,11 @@
+-- Set complete options
+vim.o.complete = '.,w,b,u,t'
+vim.o.completeopt = 'menuone,noinsert,noselect'
+
+-- Key mappings for completion navigation
+vim.api.nvim_set_keymap('i', '<C-n>', 'pumvisible() ? "\\<C-n>" : "\\<C-x>\\<C-n>"', { expr = true, noremap = true })
+vim.api.nvim_set_keymap('i', '<C-p>', 'pumvisible() ? "\\<C-p>" : "\\<C-x>\\<C-p>"', { expr = true, noremap = true })
+
 local opt = { noremap = true, silent = false }
 
 -- paste improvements
