@@ -59,7 +59,7 @@
       },
       "locked": {
         "lastModified": 1706801719,
-        "narHash": "sha256-NuqqnvxO7GurS7jTE9724P/gNJeOv/pfZ0pdnc7u4HE=",
+        "narHash": "sha256-GdqO6w5tSOfCqgR75xSRDbBL46k6x2s5/b5fU9crylA=",
         "path": "/home/kit/Documents/flakes/sfdx-shortcut-flake",
         "type": "path"
       },
