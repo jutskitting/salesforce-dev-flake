@@ -7,13 +7,14 @@ local function custom_complete(findstart, base)
     -- Locate the start of the word
     local line = vim.fn.getline('.')
     local start = vim.fn.col('.') - 1
-    while start > 0 and string.match(string.sub(line, start, start), '[%a.]') do
+    while start > 0 and string.match(string.sub(line, start, start), '[%a_]') do
       start = start - 1
     end
     return start
   else
-    -- Only show the completion menu if the base is longer than 4 characters
-    if string.len(base) < 4 then
+    -- Only show the completion menu if the base is longer than 4 characters and shorter than 40 characters
+    local base_len = string.len(base)
+    if base_len < 4 or base_len > 40 then
       return {}
     end
 
@@ -21,7 +22,7 @@ local function custom_complete(findstart, base)
     local matches = {}
     local lines = vim.fn.getbufline('%', 1, '$')
     for _, line in ipairs(lines) do
-      for match in string.gmatch(line, '%f[%a.]'..base..'[%w.]*') do
+      for match in string.gmatch(line, '[%a_]'..base..'[%w_]*') do
         table.insert(matches, match)
       end
     end
@@ -33,10 +34,13 @@ local function custom_complete(findstart, base)
       if not hash[v] then
         table.insert(unique_matches, v)
         hash[v] = true
+        if #unique_matches >= 4 then
+          break
+        end
       end
     end
 
-    return {unpack(unique_matches, 1, 4)}
+    return unique_matches
   end
 end
 

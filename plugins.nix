@@ -8,4 +8,5 @@ with pkgs.vimPlugins; [
   nvim-lspconfig
   toggleterm-nvim
   nvim-treesitter.withAllGrammars
+  copilot-vim
 ]
