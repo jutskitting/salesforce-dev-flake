@@ -38,3 +38,4 @@ end
 
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>lua _force_toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', "<leader>tt", "<Cmd>ToggleTerm direction=float<CR>", { noremap = true, silent = true })
